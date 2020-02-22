@@ -1,10 +1,10 @@
-// const INITIAL_STATE = {
-//   username: '',
-// }
+const INITIAL_STATE = {
+  username: '',
+}
 
-// export const sessionReducer = (state = INITIAL_STATE, action) => {
-//   switch(action.type) {
-//     default:
-//       return state;
-//   }
-// }
+export const sessionReducer = (state = INITIAL_STATE, action) => {
+  switch(action.type) {
+    default:
+      return state;
+  }
+}
