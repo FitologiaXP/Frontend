@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   appbar: {
-    background: 'linear-gradient(120deg, #09523B 2%, #11A558 100%)', 
+    background: 'linear-gradient(120deg, #09523B 10%, #11A558 100%)', 
   },
   menuButton: {
     marginRight: theme.spacing(2),
