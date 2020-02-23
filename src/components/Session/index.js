@@ -23,10 +23,10 @@ export default function Session() {
           <EcoIcon fontSize="large" />
           <h1>Login</h1>
         </div>
-        <hr/>
         <form action="">
           <ThemeProvider theme={theme}>
             <TextField
+              autoFocus
               color="primary"
               label="Email"
               type="email"
