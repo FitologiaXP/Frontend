@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import {
   ThemeProvider,
@@ -16,6 +16,14 @@ const theme = createMuiTheme({
 
 export default function Session() {
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSession = event => {
+    event.preventDefault();
+    console.log(email, password);
+  } 
+
   return (
     <div className="session">
       <div className="auth">
@@ -23,7 +31,7 @@ export default function Session() {
           <EcoIcon fontSize="large" />
           <h1>Login</h1>
         </div>
-        <form action="">
+        <form onSubmit={handleSession}>
           <ThemeProvider theme={theme}>
             <TextField
               autoFocus
@@ -34,8 +42,8 @@ export default function Session() {
               autoComplete="email"
               margin="normal"
               variant="outlined"
-              value=""
-              // onChange={handleChange('name')}
+              value={email}
+              onChange={event => setEmail(event.target.value)}
             />
             <TextField
               className="input-field"
@@ -44,11 +52,12 @@ export default function Session() {
               autoComplete="current-password"
               margin="normal"
               variant="outlined"
-              // onChange={handleChange('name')}
+              value={password}
+              onChange={event => setPassword(event.target.value)}
             />
           </ThemeProvider>
           <div className="action">
-            <button>Entrar</button>
+            <button type="submit">Entrar</button>
           </div>
         </form>
       </div>
