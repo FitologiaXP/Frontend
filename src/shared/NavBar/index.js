@@ -25,15 +25,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function NavBar() {
+  console.log(window.location)
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+          { window.location.pathname !== "/" ?
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton> 
+            : ""
+          }
           <EcoIcon />
           <Typography variant="h6" className={classes.title}>
             FitologiaAdmin
