@@ -9,7 +9,7 @@
 }
 
 .auth {
-  width: 28%;
+  width: 35%;
   min-width: 360px;
   height: 70%;
   background-color: #FFF;
@@ -60,6 +60,11 @@ form .action button {
   border: none;
   border-radius: 20px;
   background-color: #09523B;
+  cursor: pointer;
+}
+
+form .action button:hover {
+  background-color: #16885a;
 }
 
 .input-field:nth-of-type(1) {
@@ -68,9 +73,4 @@ form .action button {
 
 .input-field {
   border-color: #09523B !important;
-}
-
-hr {
-  border-top: 0.2px solid #EEE;
-  margin-top: 5px;
 }
