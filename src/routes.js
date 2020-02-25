@@ -12,9 +12,18 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Categories}/>
-        <Route path="/auth" component={Session}/>
-        <Route component={Session} />
+        <Route path="/" exact>
+          <Categories />
+        </Route>
+        <Route path="/login"> 
+          <Session name="Login" />
+        </Route>
+        <Route path="/cadastrar"> 
+          <Session name="Cadastrar" />
+        </Route>
+        <Route> 
+          <Session name="Login" />
+        </Route>
       </Switch>
     </Router>
   )

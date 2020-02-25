@@ -52,7 +52,7 @@ function Session(props) {
       <div className="auth">
         <div className="title">
           <EcoIcon fontSize="large" />
-          <h1>Login</h1>
+          <h1>{props.name}</h1>
         </div>
         <form onSubmit={handleSession}>
           <ThemeProvider theme={theme}>
@@ -68,12 +68,29 @@ function Session(props) {
               value={props.user.email}
               onChange={event => props.LoginAction({
                 email: event.target.value,
-                password: props.user.password
+                password: props.user.password,
+                username: props.user.username
               })}
             />
+            { props.name === 'Cadastrar' ? 
+              <TextField
+                color="primary"
+                label="Username"
+                type="text"
+                name="username"
+                margin="normal"
+                variant="outlined"
+                value={props.user.username}
+                onChange={event => props.LoginAction({
+                  email: props.user.email,
+                  password: props.user.password,
+                  username: event.target.value
+                })}
+              /> : ""
+            }
             <TextField
               className="input-field"
-              label="Password"
+              label="Senha"
               type="password"
               autoComplete="current-password"
               margin="normal"
@@ -81,12 +98,26 @@ function Session(props) {
               value={props.user.password}
               onChange={event => props.LoginAction({
                 email: props.user.email,
-                password: event.target.value
+                password: event.target.value,
+                username: props.user.username
               })}
             />
           </ThemeProvider>
-          <div className="action">
-            <button type="submit">Entrar</button>
+          <div className={ props.name === "Cadastrar" ? "action signup" : "action signin"}>
+          { props.name === "Cadastrar" ?
+            (
+              <span>
+                <button type="submit">Cadastrar</button>
+                <p>Já tem conta? <a href="/login">Login</a></p>
+              </span>
+            ) 
+            :
+            (
+              <span>
+                <button type="submit">Entrar</button>
+                <p>Não possui conta? <a href="/login">Cadastre-se</a></p>
+              </span>
+            )}
           </div>
         </form>
       </div>
