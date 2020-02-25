@@ -32,7 +32,7 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Toolbar>
-          { window.location.pathname !== "/" ?
+          { window.location.pathname !== "/auth" ?
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton> 
