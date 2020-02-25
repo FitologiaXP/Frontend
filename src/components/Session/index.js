@@ -6,6 +6,9 @@ import {
 import TextField from '@material-ui/core/TextField';
 import { green } from '@material-ui/core/colors';
 import EcoIcon from '@material-ui/icons/Eco';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { LoginAction } from '../../actions/SessionAction';
 
 import './style.css';
 import axios from '../../services/axios';
@@ -16,18 +19,17 @@ const theme = createMuiTheme({
   },
 });
 
-export default function Session(props) {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function Session(props) {
 
   const handleSession = async event => {
     event.preventDefault();
+    const {email, password} = props.user;
     const user = await axios.get(`/user/login?email=${email}&password=${password}`);
-    if(user){
-      console.log(props);
-      props.history.push('/')
+    console.log(user)
+    if(user.data.error){
+      return 
     }
+    props.history.push('/')
   } 
 
   return (
@@ -48,8 +50,11 @@ export default function Session(props) {
               autoComplete="email"
               margin="normal"
               variant="outlined"
-              value={email}
-              onChange={event => setEmail(event.target.value)}
+              value={props.user.email}
+              onChange={event => props.LoginAction({
+                email: event.target.value,
+                password: props.user.password
+              })}
             />
             <TextField
               className="input-field"
@@ -58,8 +63,11 @@ export default function Session(props) {
               autoComplete="current-password"
               margin="normal"
               variant="outlined"
-              value={password}
-              onChange={event => setPassword(event.target.value)}
+              value={props.user.password}
+              onChange={event => props.LoginAction({
+                email: props.user.email,
+                password: event.target.value
+              })}
             />
           </ThemeProvider>
           <div className="action">
@@ -70,3 +78,12 @@ export default function Session(props) {
     </div>
   )
 };
+
+const mapStateToProps = store => ({
+  user: store.sessionState
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ LoginAction }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Session);
