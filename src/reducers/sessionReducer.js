@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   email: '',
-  password: ''
+  password: '',
+  username: ''
 }
 
 const sessionReducer = (state = INITIAL_STATE, action) => {
@@ -11,6 +12,13 @@ const sessionReducer = (state = INITIAL_STATE, action) => {
         email: action.payload.email,
         password: action.payload.password
       }
+      case 'SESSION_SIGN_IN':
+        return {
+          ...state,
+          email: action.payload.email,
+          password: action.payload.password,
+          username: action.payload.username,
+        }
     default:
       return state;
   }
