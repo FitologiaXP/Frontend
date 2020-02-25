@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './style.css';
 import {
   ThemeProvider,
   createMuiTheme,
@@ -8,20 +7,27 @@ import TextField from '@material-ui/core/TextField';
 import { green } from '@material-ui/core/colors';
 import EcoIcon from '@material-ui/icons/Eco';
 
+import './style.css';
+import axios from '../../services/axios';
+
 const theme = createMuiTheme({
   palette: {
     primary: green,
   },
 });
 
-export default function Session() {
+export default function Session(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSession = event => {
+  const handleSession = async event => {
     event.preventDefault();
-    console.log(email, password);
+    const user = await axios.get(`/user/login?email=${email}&password=${password}`);
+    if(user){
+      console.log(props);
+      props.history.push('/')
+    }
   } 
 
   return (
