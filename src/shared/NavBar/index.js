@@ -25,14 +25,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function NavBar() {
-  console.log(window.location)
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Toolbar>
-          { window.location.pathname !== "/auth" ?
+          { window.location.pathname !== "/login" && window.location.pathname !== "/cadastrar" ?
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton> 

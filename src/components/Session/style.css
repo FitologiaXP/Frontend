@@ -47,7 +47,7 @@ h1 {
 
 form .action {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .signup {
@@ -56,6 +56,15 @@ form .action {
 
 .signin {
   margin-top: 80px;
+}
+
+.action-wrapper {
+  width: 100%;
+}
+
+.action-wrapper a {
+  text-decoration: none;
+  color: #1E90FF;
 }
 
 form .action button {
@@ -69,6 +78,7 @@ form .action button {
   background-color: #09523B;
   cursor: pointer;
   outline: none;
+  margin-bottom: 10px;
 }
 
 form .action button:hover {
