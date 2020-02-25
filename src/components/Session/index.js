@@ -8,7 +8,7 @@ import { green } from '@material-ui/core/colors';
 import EcoIcon from '@material-ui/icons/Eco';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { LoginAction } from '../../actions/SessionAction';
+import { LoginAction, SignInAction, ClearAction } from '../../actions/SessionAction';
 import Alert from '@material-ui/lab/Alert';
 
 import './style.css';
@@ -23,12 +23,12 @@ const theme = createMuiTheme({
 function Session(props) {
 
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
-  const handleSession = async event => {
+  const handleLogin = async event => {
     event.preventDefault();
     const {email, password} = props.user;
     const user = await axios.get(`/user/login?email=${email}&password=${password}`);
-    console.log(user)
     if(user.data.error){
       setError(user.data.error);
       setTimeout( () => {
@@ -36,11 +36,45 @@ function Session(props) {
       }, 5000);
       return 
     }
-    props.history.push('/')
+    props.history.push('/');
   } 
+
+  const handleSignup = async event => {
+    event.preventDefault();
+    const {email, password, username} = props.user;
+    const user = await axios.post('/user', {
+      email,
+      password,
+      username 
+    });
+    if(user.data.error){
+      setError(user.data.error);
+      setTimeout( () => {
+        setError('');
+      }, 5000);
+      return 
+    }
+
+
+    setSuccess('Usuário cadastrado com sucesso!');
+    setTimeout( () => {
+      setSuccess('');
+    }, 5000);
+
+    props.ClearAction();
+    props.history.push('/login');
+  }
 
   return (
     <div className="session">
+      {success 
+        ? (
+          <div className="success">
+            <Alert severity="success">{success}</Alert>
+          </div> 
+        )
+        : ""
+      }
       {error 
         ? (
           <div className="error">
@@ -54,7 +88,7 @@ function Session(props) {
           <EcoIcon fontSize="large" />
           <h1>{props.name}</h1>
         </div>
-        <form onSubmit={handleSession}>
+        <form onSubmit={props.name === "Cadastrar" ? handleSignup : handleLogin}>
           <ThemeProvider theme={theme}>
             <TextField
               autoFocus
@@ -81,7 +115,7 @@ function Session(props) {
                 margin="normal"
                 variant="outlined"
                 value={props.user.username}
-                onChange={event => props.LoginAction({
+                onChange={event => props.SignInAction({
                   email: props.user.email,
                   password: props.user.password,
                   username: event.target.value
@@ -106,16 +140,16 @@ function Session(props) {
           <div className={ props.name === "Cadastrar" ? "action signup" : "action signin"}>
           { props.name === "Cadastrar" ?
             (
-              <span>
+              <span className="action-wrapper">
                 <button type="submit">Cadastrar</button>
                 <p>Já tem conta? <a href="/login">Login</a></p>
               </span>
             ) 
             :
             (
-              <span>
+              <span className="action-wrapper">
                 <button type="submit">Entrar</button>
-                <p>Não possui conta? <a href="/login">Cadastre-se</a></p>
+                <p>Não possui conta? <a href="/cadastrar">Cadastre-se</a></p>
               </span>
             )}
           </div>
@@ -130,7 +164,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ LoginAction }, dispatch);
+  bindActionCreators({ LoginAction, SignInAction, ClearAction }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Session);
 
