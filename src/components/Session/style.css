@@ -48,6 +48,13 @@ h1 {
 form .action {
   display: flex;
   justify-content: flex-end;
+}
+
+.signup {
+  margin-top: 20px;
+}
+
+.signin {
   margin-top: 80px;
 }
 
