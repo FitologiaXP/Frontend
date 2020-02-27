@@ -42,8 +42,6 @@ export default function NavBar() {
             FitologiaAdmin
           </Typography>
         </Toolbar>
-      <a href="/login">Login</a>
-      <a href="/cadastrar">Cadastrar</a>
       </AppBar>
     </div>
   );
