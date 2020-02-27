@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://fitologia-production.netlify.com/.netlify/functions/index'
+  baseURL: 'https://fitologiabackend.azurewebsites.net'
 });
 
 export default axiosInstance;
