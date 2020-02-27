@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   appbar: {
-    background: 'linear-gradient(120deg, #09523B 10%, #11A558 100%)', 
+    background: 'linear-gradient(120deg, #09523B 10%, #11A558 100%)',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -34,7 +34,7 @@ export default function NavBar() {
           { window.location.pathname !== "/login" && window.location.pathname !== "/cadastrar" ?
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
-            </IconButton> 
+            </IconButton>
             : ""
           }
           <EcoIcon />
@@ -42,6 +42,8 @@ export default function NavBar() {
             FitologiaAdmin
           </Typography>
         </Toolbar>
+      <a href="/login">Login</a>
+      <a href="/cadastrar">Cadastrar</a>
       </AppBar>
     </div>
   );
